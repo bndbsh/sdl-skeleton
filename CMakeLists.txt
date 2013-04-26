@@ -10,7 +10,7 @@ include_directories(. ${silver_SOURCE_DIR}/build ${silver_SOURCE_DIR}/src ${silv
 
 cmake_policy(SET CMP0003 NEW)
 
-set (SOURCES gfx/sdlwidget skeleton.cc)
+set (SOURCES gfx/sdlwidget skeleton.cc locations.cc)
 
 set (LIBRARIES  ${OPENGL_gl_LIBRARY} ${OPENGL_glu_LIBRARY} SDL2 SDL2_image)
 
