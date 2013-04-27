@@ -1,7 +1,7 @@
 
 #include "sdlwidget.hh"
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+#include <SDL.h>
+#include <SDL_image.h>
 #include "skeleton.hh"
 
 #ifdef UNIX
@@ -24,7 +24,7 @@ SDLWidget::SDLWidget(bool b, Skeleton* skel) : done(false), fps(0), lastFrameTim
 	SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 	Uint32 flags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN;
 	if (!b) flags |= SDL_WINDOW_BORDERLESS;
-	window = SDL_CreateWindow("dat xflight", 0, 0, 1600, 900, flags);
+	window = SDL_CreateWindow("SDL Skeleton", 0, 0, 1024, 768, flags);
 	context = SDL_GL_CreateContext(window);
 	SDL_GL_SetSwapInterval(1);
 }
@@ -71,6 +71,7 @@ void SDLWidget::update() {
 	SDL_GL_SwapWindow(window);
 }
 
+#ifdef UNIX
 struct timespec tsSubtract (struct timespec time1, struct timespec time2) {
 	struct timespec result ;
 	if ((time1.tv_sec < time2.tv_sec) || ((time1.tv_sec == time2.tv_sec) && (time1.tv_nsec <= time2.tv_nsec))) {
@@ -86,6 +87,7 @@ struct timespec tsSubtract (struct timespec time1, struct timespec time2) {
 	}
 	return result;
 }
+#endif
 
 void SDLWidget::startLoop() {
 	while (!done) {
@@ -99,6 +101,8 @@ void SDLWidget::startLoop() {
 					break;
 			}
 		}
+		update();
+#ifdef UNIX
 		accumThreshold = 0.032*1000000000;
 		if (timeToKill <= 0) {
 			struct timespec ts_start;
@@ -130,14 +134,7 @@ void SDLWidget::startLoop() {
 			timeToKill -= t1 - lastLoop;
 			lastLoop = t1;
 		}
+#endif
 	}
 }
 
-void SDLWidget::makeContextCurrent() {
-
-}
-
-
-void SDLWidget::takeScreenShot(const std::string& path) {
-
-}

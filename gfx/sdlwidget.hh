@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 class Skeleton;
 
@@ -20,10 +20,6 @@ public:
 	void showCursor(int show);
 	
 	void startLoop();
-	
-	void makeContextCurrent();
-	
-	void takeScreenShot(const std::string& path);
 	
 	void setPosition(int x, int y);
 	

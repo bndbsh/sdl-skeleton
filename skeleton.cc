@@ -2,12 +2,6 @@
 #include "skeleton.hh"
 
 #include <iostream>
-#include <boost/shared_ptr.hpp>
-#include <boost/bind.hpp>
-
-#ifndef UNIX
-#include <windows.h>
-#endif
 #include "gfx/glew.h"
 
 class GLError : std::exception {
@@ -18,19 +12,12 @@ public:
 	inline virtual const char* what() const throw() { return data.c_str(); }
 };
 
-int main(int argc, char *argv[]) {
-	Skeleton bul(argc, argv);
-	return bul.start();
-}
-
-Skeleton::Skeleton(int& argc, char** argv) {}
 
 Skeleton::~Skeleton() {
 	delete widget;
 }
 
 int Skeleton::start() {
-	load();
 	widget->startLoop();
 	return 0;
 }
@@ -40,7 +27,7 @@ void Skeleton::resize(int width, int height) {
 	return;
 }
 
-void Skeleton::load() {
+Skeleton::Skeleton() {
 	widget = new SDLWidget(true, this);
 	
 	int errg = glewInit();

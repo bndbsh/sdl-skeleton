@@ -7,14 +7,12 @@ class Skeleton {
 private:
 	SDLWidget* widget;
 public:
-	Skeleton(int& argc, char** argv);
+	Skeleton();
 	~Skeleton();
 
 	void resize(int width, int height);
 
 	void update(double frameTime);
-
-	void load();
 
 	int start();
 };
