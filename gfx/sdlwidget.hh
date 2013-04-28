@@ -1,5 +1,5 @@
-#ifndef _SILVER_CORE_SDLWIDGET_HH_
-#define _SILVER_CORE_SDLWIDGET_HH_
+#ifndef _SKELETON_SDLWIDGET_HH_
+#define _SKELETNO_SDLWIDGET_HH_
 
 #include <string>
 

@@ -4,6 +4,8 @@
 #include <iostream>
 #include "gfx/glew.h"
 
+#include "locations.hh"
+
 class GLError : std::exception {
 	std::string data;
 public:
@@ -25,6 +27,11 @@ int Skeleton::start() {
 void Skeleton::resize(int width, int height) {
 	glViewport(0, 0, width, height);
 	return;
+}
+
+int main(int argc, char** argv) {
+	Skeleton s;
+	return s.start();
 }
 
 Skeleton::Skeleton() {

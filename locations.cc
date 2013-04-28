@@ -1,18 +1,43 @@
 
-#include <silver/util/locations.hh>
+#include "locations.hh"
 
 #if !defined(UNIX)
 #include <shlobj.h>
+#include <comdef.h>
 #else
 #include <stdlib.h>
 #endif
 
-namespace silver {
-namespace util {
+#include <sstream>
 
 std::string GetLocation(DesktopLocation location, const std::string& postfix) {
 #if !defined (UNIX)
-
+	PWSTR path;
+	std::stringstream result;
+	switch (location) {
+		case Home: {
+			SHGetKnownFolderPath(FOLDERID_Profile, 0, 0, &path);
+			_bstr_t bstrPath(path);
+			result<<bstrPath;
+			CoTaskMemFree(static_cast<void*>(path));
+			return result.str();
+		}
+		case Config: {
+			SHGetKnownFolderPath(FOLDERID_LocalAppData, 0, 0, &path);
+			_bstr_t bstrPath(path);
+			result<<bstrPath<<postfix;
+			CoTaskMemFree(static_cast<void*>(path));
+			return result.str();
+		}
+		case Cache: {
+			SHGetKnownFolderPath(FOLDERID_LocalAppData, 0, 0, &path);
+			_bstr_t bstrPath(path);
+			result<<bstrPath<<postfix;
+			CoTaskMemFree(static_cast<void*>(path));
+			return result.str();
+		}
+	}
+	return "";
 #else
 	switch (location) {
 		case Home:
@@ -34,5 +59,3 @@ std::string GetLocation(DesktopLocation location, const std::string& postfix) {
 #endif
 }
 
-}
-}
