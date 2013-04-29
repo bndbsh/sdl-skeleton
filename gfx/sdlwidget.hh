@@ -1,5 +1,5 @@
 #ifndef _SKELETON_SDLWIDGET_HH_
-#define _SKELETNO_SDLWIDGET_HH_
+#define _SKELETON_SDLWIDGET_HH_
 
 #include <string>
 
